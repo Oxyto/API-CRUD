@@ -1,0 +1,12 @@
+version: 3
+services:
+  server:
+    image: "node-18:alpine"
+  db:
+    restart: "on-failure"
+    image: "postgres"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+    expose:
+      - "5432"

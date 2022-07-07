@@ -1,0 +1,21 @@
+{
+  "include": ["src"],
+  "exclude": ["node_modules", "dest"],
+  "compilerOptions": {
+    "incremental": true,
+    "sourceMap": true,
+    "target": "es2019",
+    "moduleDetection": "auto",
+    "module": "es6",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "./dest",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "allowUnreachableCode": false,
+    "skipLibCheck": true
+  }
+}
