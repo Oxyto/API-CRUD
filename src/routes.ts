@@ -16,7 +16,7 @@ export async function post_customers(req: FastifyRequest, res: FastifyReply)
 }
 
 /* recieves customer'id and kdi, return status */
-export async function post_customers_kdi(req: FastifyRequest, res: FastifyReply)
+export async function post_customers_kpi(req: FastifyRequest, res: FastifyReply)
 {
     return res.status(201).send()
 }

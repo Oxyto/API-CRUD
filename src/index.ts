@@ -6,7 +6,7 @@ const server: FastifyInstance = fastify({})
 /* routes are defined below */
 server.get("/customers", {}, routes.get_customers)
 server.post("/customers", {}, routes.post_customers)
-server.post("/customers/:id/kpi", {}, routes.post_customers_kdi)
+server.post("/customers/:id/kpi", {}, routes.post_customers_kpi)
 
 server.listen({ port: 8080 }, (error) => {
     if (error) {

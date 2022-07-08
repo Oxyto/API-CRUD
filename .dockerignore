@@ -1,1 +1,7 @@
 Dockerfile
+src
+.git*
+docker-compose.yml
+*.json
+!package.json
+*.md

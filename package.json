@@ -4,7 +4,8 @@
   "description": "A Small & Simple API CRUD",
   "main": "dest/index.js",
   "scripts": {
-    "build": "tsc --watch"
+    "start": "node dest/index.js",
+    "build": "tsc"
   },
   "dependencies": {
     "@types/node": "^18.0.3",
