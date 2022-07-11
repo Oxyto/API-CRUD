@@ -1,7 +1,6 @@
 Dockerfile
-src
-.git*
 docker-compose.yml
-*.json
-!package.json
+.git*
 *.md
+*.tsbuildinfo
+.env.local
