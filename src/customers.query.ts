@@ -1,9 +1,9 @@
 import { Knex } from "knex"
-import { Customer } from "./dbmodel"
+import { Customer, CustomerKpi } from "./models"
 
 export async function get_customers_list(db: Knex): Promise<Customer[]>
 {
-    const customers_list: Customer[] = await db("customers")
+    const customers_list: CustomerKpi[] = await db("customers")
         .select("username", "lastname", "birthdate", "kpis.number_purchase",
             "kpis.store", "kpis.status")
         .leftJoin("kpis", "kpis.customer_id", "customers.id")

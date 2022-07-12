@@ -16,7 +16,7 @@ export async function up(knex: Knex): Promise<void> {
         number_purchase INT,
         store VARCHAR(255),
         status VARCHAR(255),
-        UNIQUE (customer_id, store),
+        PRIMARY KEY (customer_id, store),
         FOREIGN KEY (customer_id) REFERENCES customers(id)
     );`)
 }

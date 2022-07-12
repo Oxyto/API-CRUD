@@ -1,11 +1,11 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { get_customers_list, set_customers } from "./customers.query"
-import { Customer } from "./dbmodel"
-import { Kpi } from "./dbmodel"
+import { Customer } from "./models"
+import { Kpi } from "./models"
 import { set_kpi } from "./kpis.query"
 import { db } from "./dbconfig"
 
-async function check_object(attr_list: string[], obj: object): Promise<boolean>
+function check_object(attr_list: string[], obj: object): boolean
 {
     for (const key in obj) {
         if (!attr_list.includes(key))
