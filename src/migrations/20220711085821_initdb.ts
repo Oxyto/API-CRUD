@@ -7,16 +7,16 @@ export async function up(knex: Knex): Promise<void> {
         username VARCHAR(255),
         lastname VARCHAR(255),
         birthdate DATE,
+        UNIQUE (username, lastname, birthdate),
         PRIMARY KEY (id)
     );
     
     CREATE TABLE kpis (
-        id SERIAL,
         customer_id INT NOT NULL,
         number_purchase INT,
         store VARCHAR(255),
         status VARCHAR(255),
-        PRIMARY KEY (id),
+        UNIQUE (customer_id, store),
         FOREIGN KEY (customer_id) REFERENCES customers(id)
     );`)
 }

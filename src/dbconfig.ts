@@ -1,4 +1,4 @@
-import knex, { Knex } from "knex";
+import knex from "knex";
 import dotenv from "dotenv";
 
 dotenv.config({ path: ".env" });

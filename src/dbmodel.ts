@@ -5,7 +5,6 @@ export enum StatusEnum {
 }
 
 export interface Kpi {
-    customer_id: number;
     number_purchase: number;
     store: string;
     status: StatusEnum;

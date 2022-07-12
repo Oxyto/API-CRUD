@@ -1,18 +1,15 @@
-import knex, { Knex } from "knex"
+import { Knex } from "knex"
 import { Kpi } from "./dbmodel"
 
-export async function set_kpi(db: Knex, kpi: Kpi)
+export async function set_kpi(db: Knex, id: number, kpi: Kpi)
 {
-    await db.insert(kpi).into("kpis")
-}
-
-export async function check_kpi(db: Knex, id: number, kpi: Kpi): Promise<boolean>
-{
-    const customer_id: number[] = await db.select("id").from("customers").where("id", id)
-
-    if (!("number_purchase" in kpi) || !("store" in kpi) || !("customer_id" in kpi))
-        return false
-    if (!customer_id)
-        return false
-    return true
+    await db("kpis")
+        .insert({
+            customer_id: id,
+            number_purchase: kpi.number_purchase,
+            store: kpi.store,
+            status: kpi.status
+        })
+        .onConflict(["customer_id", "store"])
+        .ignore()
 }
