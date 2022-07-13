@@ -1,21 +1,15 @@
-export enum StatusEnum {
-    occasional,
-    regular,
-    VIP,
-}
-
 export interface Kpi {
-    number_purchase: number,
-    store: string,
-    status: StatusEnum
+  number_purchase: number
+  store: string
 }
 
 export interface Customer {
-    username: string,
-    lastname: string,
-    birthdate: Date
+  username: string
+  lastname: string
+  birthdate: Date
 }
 
 export interface CustomerKpi extends Customer {
-    kpis: Kpi[]
+  customer_id: number
+  kpis: Kpi[]
 }
