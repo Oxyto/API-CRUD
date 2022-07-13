@@ -8,16 +8,21 @@
     "build": "npx tsc",
     "knex:migration": "knex migrate:make --migrations-directory src/migrations -x ts"
   },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "es5",
+    "printWidth": 80
+  },
   "dependencies": {
-    "@types/node": "^18.0.3",
     "dotenv": "^16.0.1",
     "fastify": "^4.2.0",
     "got": "^12.1.0",
     "knex": "^2.1.0",
-    "pg": "^8.7.3",
-    "typescript": "^4.7.4"
+    "pg": "^8.7.3"
   },
   "devDependencies": {
+    "@types/node": "^18.0.3",
+    "typescript": "^4.7.4",
     "eslint": "^8.19.0",
     "prettier": "^2.7.1"
   }
