@@ -15,7 +15,6 @@ export async function get_customers_list(db: Knex): Promise<CustomerKpi[]> {
     .leftJoin("kpis", "customers.id", "kpis.customer_id")
   var customers_list: CustomerKpi[] = []
 
-  console.log(customers_query_list)
   for (var i: number = 0; i < customers_query_list.length; i++) {
     if (customers_query_list[i].id === -1)
       continue;
