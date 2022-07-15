@@ -3,13 +3,21 @@ export interface Kpi {
   store: string
 }
 
+export interface KpiResponse extends Kpi {
+  status: string
+}
+
 export interface Customer {
   username: string
   lastname: string
   birthdate: Date
 }
 
+export interface CustomerQuery extends Customer, KpiResponse {
+  id: number
+}
+
 export interface CustomerKpi extends Customer {
-  customer_id: number
-  kpis: Kpi[]
+  id: number
+  kpis: KpiResponse[]
 }
