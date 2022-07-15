@@ -27,7 +27,7 @@ export async function post_customers(
 
   if (
     !customer ||
-    !(await check_object(["username", "lastname", "birthdate"], customer))
+    !check_object(["username", "lastname", "birthdate"], customer)
   )
     return res.status(400).send({ error: "Bad request" })
   await set_customers(db, customer)
@@ -45,7 +45,8 @@ export async function post_customers_kpi(
   if (
     customer_id < 1 ||
     !kpi ||
-    !(await check_object(["number_purchase", "store"], kpi))
+    !check_object(["number_purchase", "store"], kpi) ||
+    kpi.number_purchase < 0
   )
     return res.status(400).send({ error: "Bad request" })
   await set_kpi(db, customer_id, kpi)
