@@ -12,7 +12,7 @@ function check_object(attr_list: string[], obj: object): boolean {
 }
 
 /* recieves nothing, return list of customers and their kdi */
-export async function get_customers(req: FastifyRequest, res: FastifyReply) {
+export async function get_customers(_req: FastifyRequest, res: FastifyReply) {
   const list: CustomerKpi[] = await get_customers_list(db)
 
   return res.status(200).send(list)
