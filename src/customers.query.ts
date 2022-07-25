@@ -1,9 +1,9 @@
 import { Knex } from "knex"
-import { Customer, CustomerKpi, CustomerQuery } from "./models"
+import { Customer, CustomerKpi, CustomerResponse } from "./models"
+import { getKpiStatus } from "./kpiUtils"
 
-
-export async function get_customers_list(db: Knex): Promise<CustomerKpi[]> {
-  const customers_query_list: CustomerQuery[] = await db("customers")
+export async function getCustomersList(db: Knex): Promise<CustomerKpi[]> {
+  const customersQuery: CustomerResponse[] = await db("customers")
     .select(
       "customers.id",
       "customers.username",
@@ -11,35 +11,25 @@ export async function get_customers_list(db: Knex): Promise<CustomerKpi[]> {
       "customers.birthdate",
       "number_purchase",
       "store",
-      "status"
     )
     .leftJoin("kpis", "customers.id", "kpis.customer_id")
-  const customers_list: CustomerKpi[] = []
+  const customers: CustomerKpi[] = customersQuery.map((customer, _i, query_list) => ({
+    id: customer.id,
+    username: customer.username,
+    lastname: customer.lastname,
+    birthdate: customer.birthdate,
+    kpis: query_list.filter((elem) => elem.id === customer.id)
+      .map((elem) => ({
+        number_purchase: elem.number_purchase,
+        store: elem.store,
+        status: getKpiStatus(elem.number_purchase),
+      }))
+  }))
+  .filter((elem, i, list) => list.findIndex((rawElem) => rawElem.id === elem.id) === i)
 
-  for (var i: number = 0; i < customers_query_list.length; i++) {
-    customers_list[i] = {
-      id: customers_query_list[i].id,
-      username: customers_query_list[i].username,
-      lastname: customers_query_list[i].lastname,
-      birthdate: customers_query_list[i].birthdate,
-      kpis: [],
-    }
-    for (var j: number = i; j < customers_query_list.length; j++) {
-      if (customers_list[i].id === customers_query_list[j].id) {
-        customers_list[i].kpis.push({
-          number_purchase: customers_query_list[j].number_purchase,
-          store: customers_query_list[j].store,
-          status: customers_query_list[j].status,
-        })
-        customers_query_list.splice(j, 1)
-      }
-    }
-  }
-
-  return customers_list
+  return customers
 }
-
-export async function set_customers(db: Knex, customer: Customer) {
+export async function setCustomers(db: Knex, customer: Customer) {
   await db("customers")
     .insert(customer)
     .onConflict(["username", "lastname", "birthdate"])

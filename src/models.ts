@@ -13,7 +13,7 @@ export interface Customer {
   birthdate: Date
 }
 
-export interface CustomerQuery extends Customer, KpiResponse {
+export interface CustomerResponse extends Customer, KpiResponse {
   id: number
 }
 
