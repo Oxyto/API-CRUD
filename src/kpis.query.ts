@@ -1,5 +1,5 @@
 import { Knex } from "knex"
-import { Kpi } from "./models"
+import type { Kpi } from "./models"
 
 export async function setKpi(db: Knex, id: number, kpi: Kpi) {
   await db("kpis")

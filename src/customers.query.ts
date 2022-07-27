@@ -1,19 +1,9 @@
 import { Knex } from "knex"
-import { Customer, CustomerKpi, CustomerResponse } from "./models"
+import type { Customer, CustomerKpi, CustomerResponse } from "./models"
 import { getKpiStatus } from "./kpiUtils"
 
-export async function getCustomersList(db: Knex): Promise<CustomerKpi[]> {
-  const customersQuery: CustomerResponse[] = await db("customers")
-    .select(
-      "customers.id",
-      "customers.username",
-      "customers.lastname",
-      "customers.birthdate",
-      "number_purchase",
-      "store"
-    )
-    .leftJoin("kpis", "customers.id", "kpis.customer_id")
-  const customers: CustomerKpi[] = customersQuery
+export function createCustomersQuery(customersQuery: CustomerResponse[]) {
+  return customersQuery
     .map((customer, _i, query_list) => ({
       id: customer.id,
       username: customer.username,
@@ -31,9 +21,24 @@ export async function getCustomersList(db: Knex): Promise<CustomerKpi[]> {
       (elem, i, list) =>
         list.findIndex((rawElem) => rawElem.id === elem.id) === i
     )
+}
+
+export async function getCustomersList(db: Knex): Promise<CustomerKpi[]> {
+  const customersQuery: CustomerResponse[] = await db("customers")
+    .select(
+      "customers.id",
+      "customers.username",
+      "customers.lastname",
+      "customers.birthdate",
+      "number_purchase",
+      "store"
+    )
+    .leftJoin("kpis", "customers.id", "kpis.customer_id")
+  const customers: CustomerKpi[] = createCustomersQuery(customersQuery)
 
   return customers
 }
+
 export async function setCustomers(db: Knex, customer: Customer) {
   await db("customers")
     .insert(customer)

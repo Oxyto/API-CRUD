@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { getCustomersList, setCustomers } from "./customers.query"
-import { Customer, Kpi, CustomerKpi } from "./models"
+import type { Customer, Kpi, CustomerKpi } from "./models"
 import { setKpi } from "./kpis.query"
 import { db } from "./dbconfig"
 
