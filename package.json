@@ -5,7 +5,7 @@
   "main": "dest/index.js",
   "scripts": {
     "integration-test": "",
-    "unit-test": "npx tsc jest",
+    "unit-test": "npx jest src",
     "start": "node dest/index.js",
     "build": "npx tsc",
     "knex:migration": "knex migrate:make --migrations-directory src/migrations -x ts"
