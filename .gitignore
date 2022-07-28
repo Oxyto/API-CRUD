@@ -2,8 +2,5 @@
 .env
 /node_modules
 /dest
-*.json
-!tsconfig.json
-!package.json
 *.md
 *.tsbuildinfo

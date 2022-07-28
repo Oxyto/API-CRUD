@@ -1,23 +1,26 @@
 import got from "got"
+import dotenv from "dotenv"
 import { getKpiStatus } from "./kpiUtils"
 import type { Customer, Kpi } from "./models"
 
+dotenv.config({ path: ".env" })
+
 test("Get a empty list of customers", async () => {
   const res = await got.get(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers`
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers`
   )
 
-  expect(res.body).toEqual([])
+  expect(JSON.parse(res.body)).toEqual([])
 })
 
 test("Create a new customer", async () => {
   const customerBody: Customer = {
     username: "Bob",
     lastname: "Ross",
-    birthdate: new Date(1942, 10, 29),
+    birthdate: new Date(1942, 10, 29, 0, 0, 0, 0),
   }
   const res = await got.post(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers`,
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers`,
     { json: customerBody }
   )
 
@@ -25,9 +28,13 @@ test("Create a new customer", async () => {
 })
 
 test("Create a new customer with invalid body", async () => {
+  const customer = {
+    a: 2,
+    username: "Pop"
+  }
   const res = await got.post(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers`,
-    {}
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers`,
+    { json: customer, throwHttpErrors: false }
   )
 
   expect(res.statusCode).toBe(400)
@@ -35,8 +42,8 @@ test("Create a new customer with invalid body", async () => {
 
 test("Create a new customer with empty body", async () => {
   const res = await got.post(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers`,
-    {}
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers`,
+    { json: {}, throwHttpErrors: false }
   )
 
   expect(res.statusCode).toBe(400)
@@ -48,7 +55,7 @@ test("Create new customer kpi", async () => {
     store: "FNAC",
   }
   const res = await got.post(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers/1/kpi`,
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers/1/kpi`,
     { json: kpiBody }
   )
 
@@ -61,8 +68,8 @@ test("Create new customer kpi with invalid id", async () => {
     store: "FNAC",
   }
   const res = await got.post(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers/0/kpi`,
-    { json: kpiBody }
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers/0/kpi`,
+    { json: kpiBody, throwHttpErrors: false }
   )
 
   expect(res.statusCode).toBe(400)
@@ -74,8 +81,8 @@ test("Create new customer kpi with invalid body", async () => {
     number_purchase: 42,
   }
   const res = await got.post(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers/1/kpi`,
-    { json: kpiBody }
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers/1/kpi`,
+    { json: kpiBody, throwHttpErrors: false }
   )
 
   expect(res.statusCode).toBe(400)
@@ -83,8 +90,8 @@ test("Create new customer kpi with invalid body", async () => {
 
 test("Create new customer kpi with empty body", async () => {
   const res = await got.post(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers/1/kpi`,
-    { json: {} }
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers/1/kpi`,
+    { json: {}, throwHttpErrors: false }
   )
 
   expect(res.statusCode).toBe(400)
@@ -92,14 +99,15 @@ test("Create new customer kpi with empty body", async () => {
 
 test("Get a non-empty list of customers", async () => {
   const res = await got.get(
-    `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/customers`
+    `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers`
   )
 
-  expect(res.body).toEqual([
+  expect(JSON.parse(res.body)).toEqual([
     {
+      id: 1,
       username: "Bob",
       lastname: "Ross",
-      birthdate: new Date(1942, 10, 29),
+      birthdate: new Date(1942, 10, 29, 0, 0, 0, 0),
       kpis: [
         {
           number_purchase: 42,

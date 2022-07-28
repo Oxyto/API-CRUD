@@ -4,3 +4,4 @@ docker-compose.yml
 *.md
 *.tsbuildinfo
 .env.local
+tests
