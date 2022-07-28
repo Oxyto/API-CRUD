@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules", "dest"],
   "compilerOptions": {
     "incremental": true,
@@ -7,7 +7,6 @@
     "target": "es2019",
     "moduleDetection": "auto",
     "module": "CommonJS",
-    "rootDir": "./src",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "outDir": "./dest",
