@@ -17,7 +17,7 @@ test("Create a new customer", async () => {
   const customerBody: Customer = {
     username: "Bob",
     lastname: "Ross",
-    birthdate: new Date(1942, 10, 29, 0, 0, 0, 0),
+    birthdate: new Date("1942-10-29"),
   }
   const res = await got.post(
     `http://${process.env.MOCK_IP}:${process.env.HOST_PORT}/customers`,
@@ -107,7 +107,7 @@ test("Get a non-empty list of customers", async () => {
       id: 1,
       username: "Bob",
       lastname: "Ross",
-      birthdate: new Date(1942, 10, 29, 0, 0, 0, 0),
+      birthdate: new Date("1942-10-29").toISOString(),
       kpis: [
         {
           number_purchase: 42,
