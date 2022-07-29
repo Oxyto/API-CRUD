@@ -16,6 +16,7 @@
     "printWidth": 80
   },
   "dependencies": {
+    "@fastify/swagger": "^7.4.1",
     "dotenv": "^16.0.1",
     "fastify": "^4.2.0",
     "knex": "^2.1.0",
