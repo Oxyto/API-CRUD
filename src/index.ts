@@ -94,6 +94,20 @@ server.register(async (server) => {
             },
           },
         },
+        response: {
+          201: {
+            description: "Successfully created a new customer",
+            type: "null",
+          },
+          400: {
+            description: "Invalid or empty body request",
+            type: "null",
+          },
+          500: {
+            description: "Internal server error",
+            type: "null",
+          },
+        },
       },
     },
     routes.postCustomers
@@ -113,6 +127,20 @@ server.register(async (server) => {
             store: {
               type: "string",
             },
+          },
+        },
+        response: {
+          201: {
+            description: "Successfully created a KPI to a customer",
+            type: "null",
+          },
+          400: {
+            description: "Invalid customer ID or invalid body request",
+            type: "null",
+          },
+          500: {
+            description: "Internal server error",
+            type: "null",
           },
         },
       },
