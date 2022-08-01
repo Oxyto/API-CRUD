@@ -1,7 +1,7 @@
 import got from "got"
 import dotenv from "dotenv"
-import { getKpiStatus } from "./src/kpiUtils"
-import type { Customer, Kpi } from "./src/models"
+import { getKpiStatus } from "../src/kpiUtils"
+import type { Customer, Kpi } from "../src/models"
 
 dotenv.config({ path: ".env" })
 

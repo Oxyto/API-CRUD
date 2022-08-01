@@ -1,10 +1,16 @@
+export enum StatusEnum {
+  occasional = "occasional",
+  regular = "regular",
+  VIP = "VIP",
+}
+
 export interface Kpi {
   number_purchase: number
   store: string
 }
 
 export interface KpiResponse extends Kpi {
-  status: string
+  status: StatusEnum
 }
 
 export interface Customer {

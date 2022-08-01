@@ -22,7 +22,7 @@ server.register(swagger, {
     consumes: ["application/json"],
     produces: ["application/json"],
   },
-  routePrefix: "/", 
+  routePrefix: "/",
   exposeRoute: true,
 })
 
@@ -39,6 +39,9 @@ server.register(async (server) => {
             items: {
               type: "object",
               properties: {
+                id: {
+                  type: "number",
+                },
                 username: {
                   type: "string",
                 },
