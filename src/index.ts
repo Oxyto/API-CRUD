@@ -22,6 +22,7 @@ server.register(swagger, {
     consumes: ["application/json"],
     produces: ["application/json"],
   },
+  routePrefix: "/", 
   exposeRoute: true,
 })
 
@@ -67,6 +68,10 @@ server.register(async (server) => {
                 },
               },
             },
+          },
+          500: {
+            description: "Internal server error",
+            type: "null",
           },
         },
       },
