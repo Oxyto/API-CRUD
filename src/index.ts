@@ -4,7 +4,7 @@ import { db } from "./dbconfig"
 import swagger from "@fastify/swagger"
 import * as routes from "./routes"
 
-dotenv.config({ path: "../.env" })
+dotenv.config({ path: ".env" })
 
 db.migrate.latest({ directory: "dest/migrations" })
 
