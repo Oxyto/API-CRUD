@@ -6,6 +6,8 @@ import * as routes from "./routes"
 
 dotenv.config({ path: ".env" })
 
+dotenv.config({ path: "../.env" })
+
 db.migrate.latest({ directory: "dest/migrations" })
 
 const server: FastifyInstance = fastify({})
