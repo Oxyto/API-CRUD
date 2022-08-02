@@ -5,8 +5,10 @@ import { setKpi } from "./kpis.query"
 import { db } from "./dbconfig"
 
 function checkObject(attr_list: string[], obj: object): boolean {
-  return Object.keys(obj).every((elem) => attr_list.includes(elem)) &&
+  return (
+    Object.keys(obj).every((elem) => attr_list.includes(elem)) &&
     Object.keys(obj).length > 0
+  )
 }
 
 export async function getCustomers(_req: FastifyRequest, res: FastifyReply) {
